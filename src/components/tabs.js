@@ -20,6 +20,17 @@ const Tabs = (topics) => {
     let tab = document.createElement("div")
     tab.classList.add("tab")
     tab.textContent = element
+
+    const sheet = new CSSStyleSheet();
+    tab.addEventListener('click', function(event){
+      sheet.replaceSync(`.cards-container .card {display:none;} .cards-container .${element.split(".")[0]}{display:flex;}`)
+      document.adoptedStyleSheets = [sheet];
+    })
+    
+    
+    // Apply the stylesheet to a document:
+    
+
     topic.appendChild(tab)
   })
   return topic
@@ -34,8 +45,12 @@ const tabsAppender = (selector) => {
   // Append the tabs to the element in the DOM that matches the selector passed to the function.
   //
   let toPasteTo = document.querySelector(selector)
-  let tabs = Tabs(['javascript', 'bootstrap', 'technology'])
-  toPasteTo.appendChild(tabs)
+  axios.get('https://lambda-times-api.herokuapp.com/topics')
+    .then(data => {
+      let tabs = Tabs(data.data.topics)
+      toPasteTo.appendChild(tabs)
+    })
+  
 }
 
 export { Tabs, tabsAppender }

@@ -1,4 +1,4 @@
-const Card = (article) => {
+const Card = (name, article) => {
   // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.
@@ -19,6 +19,7 @@ const Card = (article) => {
   //
   let card = document.createElement("div")
   card.classList.add("card")
+  card.classList.add(name)
   
   let headline = document.createElement("div")
   headline.classList.add("headline")
@@ -60,10 +61,9 @@ const cardAppender = (selector) => {
   
   axios.get('https://lambda-times-api.herokuapp.com/articles')
     .then(data => {
-      console.log(data.data.articles)
       for (let element in data.data.articles){
         data.data.articles[element].forEach((card)=>{
-          let fullCard = Card(card)
+          let fullCard = Card(element, card)
           toPasteTo.appendChild(fullCard)
         })
       }

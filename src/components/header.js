@@ -41,7 +41,7 @@ const headerAppender = (selector) => {
   // It should append the header to the element in the DOM that matches the given selector.
   //
   let toPasteTo = document.querySelector(selector)
-  let header = Header("Sample Title","2/12/2021", "I am temporarily a temp")
+  let header = Header("Lambda Technology News","2/12/2021", "I dont know what a temp is")
   toPasteTo.appendChild(header)
 }
 
